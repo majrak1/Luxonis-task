@@ -1,0 +1,4 @@
+Scrapy==2.9.0
+requests==2.30.0
+requests-file==1.5.1
+mysql-connector-python

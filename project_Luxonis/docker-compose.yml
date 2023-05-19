@@ -1,0 +1,24 @@
+services:
+  pythonapp:
+    build: ./python/
+    command: sh -c "sleep 10s ; python3 ./scrape.py"
+    depends_on:
+      - mysql
+
+  mysql:
+    build: ./mysql/
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'db'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - '3306:3306'
+
+  web:
+    build: ./web/
+    restart: always
+    command: sh -c "sleep 15s ; python3 ./server.py"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
